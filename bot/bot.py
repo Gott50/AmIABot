@@ -120,8 +120,8 @@ class Bot:
         u = url or 'http://localhost:5000'
         self.print("url: %s" % u)
         driver.get(u)
-
-        self.print(driver.page_source)
+        text = driver.find_elements_by_tag_name('body')[0].text
+        self.print(text)
 
     def end(self):
         """Closes the current session"""
