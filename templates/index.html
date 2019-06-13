@@ -1,0 +1,87 @@
+<html>
+<head>
+    <style>
+        .no_bot {
+            background-color: green;
+        }
+
+        .bot {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<a href="/">click to refresh</a>
+<table>
+    <tr id="id_webdriver">
+        <td>webdriver</td>
+    </tr>
+    <tr id="id_selenium">
+        <td>selenium</td>
+    </tr>
+    <tr id="id_phantom">
+        <td>phantom</td>
+    </tr>
+    <tr id="id_nightmareJS">
+        <td>nightmareJS</td>
+    </tr>
+</table>
+
+<script>
+    function test_bot(id, test_result) {
+        if (test_result) {
+            document.getElementById(id).className = "bot";
+            document.getElementById(id).innerHTML += "<tr>BOT!!!</tr>";
+        } else {
+            document.getElementById(id).className = "no_bot";
+            document.getElementById(id).innerHTML += "<tr>no bot</tr>";
+        }
+    }
+
+    function nightmareJS_presence() {
+        return !!window.__nightmare;
+    }
+
+    function phantom_presence() {
+        return (
+            'callPhantom' in window |
+            '_phantom' in window |
+            'phantom' in window
+        );
+    }
+
+    function webdriver_presence() {
+        return (
+            'webdriver' in window ||
+            '__webdriver_script_fn' in document ||
+            '__driver_evaluate' in document ||
+            '__webdriver_evaluate' in document ||
+            '__fxdriver_evaluate' in document ||
+            '__driver_unwrapped' in document ||
+            '__webdriver_unwrapped' in document ||
+            '__fxdriver_unwrapped' in document ||
+            '__webdriver_script_func' in document ||
+            document.documentElement.getAttribute("webdriver") !== null ||
+            navigator.webdriver ||
+            document.documentElement.getAttribute("driver") !== null
+        );
+    }
+
+    function selenium_presence() {
+        return (
+            '_Selenium_IDE_Recorder' in window |
+            'callSelenium' in window |
+            '_selenium' in window |
+            '__selenium_evaluate' in document |
+            '__selenium_unwrapped' in document |
+            document.documentElement.getAttribute("selenium") !== null
+        );
+    }
+
+    test_bot("id_webdriver", webdriver_presence());
+    test_bot("id_selenium", selenium_presence());
+    test_bot("id_phantom", phantom_presence());
+    test_bot("id_nightmareJS", nightmareJS_presence());
+</script>
+</body>
+</html>
