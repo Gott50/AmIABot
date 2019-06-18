@@ -8,7 +8,7 @@ from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 
-from bot.settings import Settings
+from settings import Settings
 
 
 class Bot:
