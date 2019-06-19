@@ -98,12 +98,30 @@ class Bot:
 
         return self
 
-    def set_selenium_remote_session(self, selenium_url=''):
-        """Starts remote session for a selenium server.
-         Useful for docker setup."""
-        self.browser = webdriver.Remote(
-            command_executor=selenium_url,
-            desired_capabilities=DesiredCapabilities.CHROME)
+    def set_selenium_remote_session(self, selenium_url='',
+                                    selenium_driver=None):
+        """
+        Starts remote session for a selenium server.
+        Creates a new selenium driver instance for remote session or uses
+        provided
+        one. Useful for docker setup.
+
+        :param selenium_url: string
+        :param selenium_driver: selenium WebDriver
+        :return: self
+        """
+
+        if selenium_driver:
+            self.browser = selenium_driver
+        else:
+            if self.use_firefox:
+                self.browser = webdriver.Remote(
+                    command_executor=selenium_url,
+                    desired_capabilities=DesiredCapabilities.FIREFOX)
+            else:
+                self.browser = webdriver.Remote(
+                    command_executor=selenium_url,
+                    desired_capabilities=DesiredCapabilities.CHROME)
 
         message = "Session started!"
 
