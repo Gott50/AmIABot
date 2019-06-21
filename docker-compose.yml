@@ -13,8 +13,6 @@ services:
       - selenium:selenium
       - web:web
     volumes:
-      - ./logs:/code/logs
-      - ./docker:/root/InstaPy
       - ./bot:/bot
 
   web:
