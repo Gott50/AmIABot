@@ -26,4 +26,4 @@ RUN apk add --no-cache --virtual .build-deps \
 COPY . .
 
 EXPOSE 5000
-CMD python app.py 5000
+CMD /usr/local/bin/gunicorn -b :5000 app:app
