@@ -6,7 +6,6 @@ app = Flask(__name__)
 @app.route('/')
 def render_root():
     r = request
-    app.logger.warning("user_agent: %s" % r.user_agent)
     # app.logger.warning("data: %s" % r.data)
     app.logger.warning("headers: %s " % r.headers)
     # app.logger.warning("view_args: %s " % r.view_args)
