@@ -44,10 +44,15 @@ class Bot:
         Default case scenario."""
         chromedriver_location = Settings.chromedriver_location
         chrome_options = Options()
-        chrome_options.add_argument('--dns-prefetch-disable')
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--lang=de-DE')
-        chrome_options.add_argument('--disable-setuid-sandbox')
+        mobile_emulation = {"deviceName": "iPhone 6/7/8"}
+        chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+
+        chrome_options.add_argument('--incognito')
+        chrome_options.add_argument("disable-infobars")  # disabling infobars
+        chrome_options.add_argument("--disable-extensions")  # disabling extensions
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")  # overcome limited resource problems
+
 
         # this option implements Chrome Headless, a new (late 2017)
         # GUI-less browser. chromedriver 2.9 and above required
@@ -135,6 +140,8 @@ class Bot:
 
     def act(self, url=None):
         driver = self.browser
+        self.print("browser.capabilities: %s" % driver.capabilities)
+
         u = url or 'http://localhost:5000'
         self.print("url: %s" % u)
         driver.get(u)
