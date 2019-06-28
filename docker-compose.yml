@@ -19,17 +19,17 @@ services:
     build: .
     volumes:
       - .:/app
-    ports:
-      - "5000:5000"
+#    ports:
+#      - "5000:5000"
     environment:
       - FLASK_ENV=development
 
   selenium:
-    image: selenium/standalone-chrome:3.141.59
+    image: selenium/standalone-chrome:3.0
     environment:
       - NODE_MAX_INSTANCES=1
       - NODE_MAX_SESSION=1
-    ports:
-      - "5900:5900"
-      - "4444:4444"
+#    ports:
+#      - "5900:5900"
+#      - "4444:4444"
     shm_size: 128M
