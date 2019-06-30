@@ -25,11 +25,11 @@ services:
       - FLASK_ENV=development
 
   selenium:
-    image: selenium/standalone-chrome:3.0
+    image: selenium/standalone-chrome:3.7
     environment:
       - NODE_MAX_INSTANCES=1
       - NODE_MAX_SESSION=1
-#    ports:
+    ports:
+      - "4444:4444"
 #      - "5900:5900"
-#      - "4444:4444"
     shm_size: 128M

@@ -44,7 +44,7 @@ class Bot:
         Default case scenario."""
         chromedriver_location = Settings.chromedriver_location
         chrome_options = Options()
-        mobile_emulation = {"deviceName": "iPhone 6/7/8"}
+        mobile_emulation = {"deviceName": "iPhone 5"}
         chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
 
         chrome_options.add_argument('--incognito')

@@ -19,7 +19,7 @@ from urllib3.exceptions import NewConnectionError, ProtocolError, MaxRetryError
 
 
 def selenium_driver(selenium_url):
-    mobile_emulation = {"deviceName": "iPhone 6/7/8"}
+    mobile_emulation = {"deviceName": "iPhone 5"}
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--incognito')
     chrome_options.add_argument("disable-infobars")  # disabling infobars
@@ -39,4 +39,4 @@ bot.set_selenium_remote_session(selenium_url=selenium_url, selenium_driver=selen
 
 bot.act('http://web:5000')
 
-bot.end()
+# bot.end()
