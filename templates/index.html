@@ -13,6 +13,9 @@
 <body>
 <a href="/">click to refresh</a>
 <table>
+    <tr id="id_bot_detection">
+        <td>BotDetection</td>
+    </tr>
     <tr id="id_webdriver">
         <td>webdriver</td>
     </tr>
@@ -78,6 +81,60 @@
         );
     }
 
+     function runBotDetection() {
+        var documentDetectionKeys = [
+            "__webdriver_evaluate",
+            "__selenium_evaluate",
+            "__webdriver_script_function",
+            "__webdriver_script_func",
+            "__webdriver_script_fn",
+            "__fxdriver_evaluate",
+            "__driver_unwrapped",
+            "__webdriver_unwrapped",
+            "__driver_evaluate",
+            "__selenium_unwrapped",
+            "__fxdriver_unwrapped",
+        ];
+
+        var windowDetectionKeys = [
+            "_phantom",
+            "__nightmare",
+            "_selenium",
+            "callPhantom",
+            "callSelenium",
+            "_Selenium_IDE_Recorder",
+        ];
+
+        for (const windowDetectionKey in windowDetectionKeys) {
+            const windowDetectionKeyValue = windowDetectionKeys[windowDetectionKey];
+            if (window[windowDetectionKeyValue]) {
+                return true;
+            }
+        }
+        for (const documentDetectionKey in documentDetectionKeys) {
+            const documentDetectionKeyValue = documentDetectionKeys[documentDetectionKey];
+            if (window['document'][documentDetectionKeyValue]) {
+                return true;
+            }
+        }
+
+        for (const documentKey in window['document']) {
+            if (documentKey.match(/\$[a-z]dc_/) && window['document'][documentKey]['cache_']) {
+                return true;
+            }
+        }
+
+        if (window['external'] && window['external'].toString() && (window['external'].toString()['indexOf']('Sequentum') != -1)) return true;
+
+        if (window['document']['documentElement']['getAttribute']('selenium')) return true;
+        if (window['document']['documentElement']['getAttribute']('webdriver')) return true;
+        if (window['document']['documentElement']['getAttribute']('driver')) return true;
+
+        return false;
+    };
+
+
+    test_bot("id_bot_detection", webdriver_presence());
     test_bot("id_webdriver", webdriver_presence());
     test_bot("id_selenium", selenium_presence());
     test_bot("id_phantom", phantom_presence());
