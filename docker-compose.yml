@@ -23,7 +23,7 @@ services:
       - FLASK_ENV=development
 
   selenium:
-    image: selenium/standalone-chrome:3.7.1
+    image: selenium/standalone-chrome:3.141.59
     environment:
       - NODE_MAX_INSTANCES=1
       - NODE_MAX_SESSION=1

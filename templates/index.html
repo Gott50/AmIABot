@@ -77,7 +77,8 @@
             '_selenium' in window |
             '__selenium_evaluate' in document |
             '__selenium_unwrapped' in document |
-            document.documentElement.getAttribute("selenium") !== null
+            document.documentElement.getAttribute("selenium") !== null|
+            window.navigator.webdriver
         );
     }
 
