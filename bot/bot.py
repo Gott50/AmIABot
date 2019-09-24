@@ -43,16 +43,16 @@ class Bot:
         """Starts local session for a selenium server.
         Default case scenario."""
         chromedriver_location = Settings.chromedriver_location
-        chrome_options = Options()
         mobile_emulation = {"deviceName": "iPhone 5"}
-        chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
-
+        chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--incognito')
+        chrome_options.add_argument("start-maximized")  # open Browser in maximized mode
         chrome_options.add_argument("disable-infobars")  # disabling infobars
         chrome_options.add_argument("--disable-extensions")  # disabling extensions
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")  # overcome limited resource problems
-
+        chrome_options.add_experimental_option("excludeSwitches", ['enable-automation'])
+        chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
 
         # this option implements Chrome Headless, a new (late 2017)
         # GUI-less browser. chromedriver 2.9 and above required
